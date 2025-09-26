@@ -229,20 +229,20 @@ class _ChatUITextFieldState extends State<ChatUITextField> {
                   } else {
                     return Row(
                       children: [
-                             IconButton(
-                          onPressed: () async {
-                            final path = await pickPdf();
-                            widget.onFileSelected(
-                              path ?? '',
-                              '',
-                            );
-                          },
-                          icon: const Icon(
-                            Icons.attach_file,
-                            color: Colors.black,
-                          ),
-                        ),
                         if (!isRecordingValue) ...[
+                          IconButton(
+                            onPressed: () async {
+                              final path = await pickPdf();
+                              widget.onFileSelected(
+                                path ?? '',
+                                '',
+                              );
+                            },
+                            icon: const Icon(
+                              Icons.attach_file,
+                              color: Colors.black,
+                            ),
+                          ),
                           if (sendMessageConfig?.enableCameraImagePicker ??
                               true)
                             IconButton(
@@ -388,24 +388,26 @@ class _ChatUITextFieldState extends State<ChatUITextField> {
       widget.onImageSelected('', e.toString());
     }
   }
-Future<String?> pickPdf() async {
-  try {
-    FilePickerResult? result = await FilePicker.platform.pickFiles(
-      type: FileType.custom,
-      allowedExtensions: ['pdf'],
-    );
 
-    if (result != null && result.files.single.path != null) {
-      final filePath = result.files.single.path!;
+  Future<String?> pickPdf() async {
+    try {
+      FilePickerResult? result = await FilePicker.platform.pickFiles(
+        type: FileType.custom,
+        allowedExtensions: ['pdf'],
+      );
 
-      return filePath ?? "";
-    } else {
-      return "";
+      if (result != null && result.files.single.path != null) {
+        final filePath = result.files.single.path!;
+
+        return filePath ?? "";
+      } else {
+        return "";
+      }
+    } catch (e) {
+      return null;
     }
-  } catch (e) {
-    return null;
   }
-}
+
   void _onChanged(String inputText) {
     debouncer.run(() {
       composingStatus.value = TypeWriterStatus.typed;
