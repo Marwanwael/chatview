@@ -113,9 +113,13 @@ class _VoiceMessageViewState extends State<VoiceMessageView> {
                                   color: Colors.white,
                                 )
                             : widget.config?.pauseIcon ??
-                                const Icon(
+                                Icon(
                                   Icons.stop,
-                                  color: Colors.white,
+                                  color: widget.isMessageBySender
+                                      ? widget.outgoingChatBubbleConfig
+                                          ?.textStyle?.color
+                                      : widget.inComingChatBubbleConfig
+                                          ?.textStyle?.color,
                                 ),
                   );
                 },
