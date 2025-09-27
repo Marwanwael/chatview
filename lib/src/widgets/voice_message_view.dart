@@ -55,9 +55,8 @@ class _VoiceMessageViewState extends State<VoiceMessageView> {
   PlayerState get playerState => _playerState.value;
 
   PlayerWaveStyle playerWaveStyle = const PlayerWaveStyle(
-      scaleFactor: 70,
-      backgroundColor: Colors.black54,
-      liveWaveColor: Colors.black);
+    scaleFactor: 70,
+  );
 
   @override
   void initState() {
@@ -136,8 +135,14 @@ class _VoiceMessageViewState extends State<VoiceMessageView> {
                 size: Size(widget.screenWidth * 0.50, 60),
                 playerController: controller,
                 waveformType: WaveformType.fitWidth,
-                playerWaveStyle:
-                    widget.config?.playerWaveStyle ?? playerWaveStyle,
+                playerWaveStyle: (widget.isMessageBySender)
+                    ? PlayerWaveStyle(
+                        scaleFactor: 70,
+                        backgroundColor: Colors.white,
+                        liveWaveColor: Colors.black,
+                        seekLineColor: Colors.black,
+                        fixedWaveColor: Colors.black54)
+                    : playerWaveStyle,
                 padding: widget.config?.waveformPadding ??
                     const EdgeInsets.only(right: 10),
                 margin: widget.config?.waveformMargin,
