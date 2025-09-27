@@ -54,7 +54,10 @@ class _VoiceMessageViewState extends State<VoiceMessageView> {
 
   PlayerState get playerState => _playerState.value;
 
-  PlayerWaveStyle playerWaveStyle = const PlayerWaveStyle(scaleFactor: 70);
+  PlayerWaveStyle playerWaveStyle = const PlayerWaveStyle(
+      scaleFactor: 70,
+      backgroundColor: Colors.black54,
+      liveWaveColor: Colors.black);
 
   @override
   void initState() {
@@ -108,9 +111,13 @@ class _VoiceMessageViewState extends State<VoiceMessageView> {
                     icon:
                         state.isStopped || state.isPaused || state.isInitialised
                             ? widget.config?.playIcon ??
-                                const Icon(
+                                Icon(
                                   Icons.play_arrow,
-                                  color: Colors.white,
+                                  color: widget.isMessageBySender
+                                      ? widget.outgoingChatBubbleConfig
+                                          ?.textStyle?.color
+                                      : widget.inComingChatBubbleConfig
+                                          ?.textStyle?.color,
                                 )
                             : widget.config?.pauseIcon ??
                                 Icon(
