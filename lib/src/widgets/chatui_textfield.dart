@@ -399,7 +399,7 @@ class _ChatUITextFieldState extends State<ChatUITextField> {
       if (result != null && result.files.single.path != null) {
         final filePath = result.files.single.path!;
 
-        return filePath ?? "";
+        return filePath;
       } else {
         return "";
       }

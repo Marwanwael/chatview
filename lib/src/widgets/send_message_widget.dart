@@ -29,7 +29,7 @@ import 'package:chatview/src/widgets/reply_message_view.dart';
 import 'package:chatview/src/widgets/scroll_to_bottom_button.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
-
+import 'package:path/path.dart' as p;
 import '../utils/constants/constants.dart';
 
 class SendMessageWidget extends StatefulWidget {
@@ -294,9 +294,43 @@ class SendMessageWidgetState extends State<SendMessageWidget> {
 
   void _onFileSelected(String filePath, String error) {
     if (filePath.isEmpty) return;
-
-    widget.onSendTap.call(filePath, replyMessage, MessageType.custom);
-    _assignRepliedMessage();
+    String fileName = p.basename(filePath);
+    showDialog(
+      context: context,
+      builder: (context) {
+        return Dialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(
+                  Icons.picture_as_pdf,
+                  color: Colors.redAccent,
+                  size: 40,
+                ),
+                const SizedBox(width: 16),
+                Expanded(
+                  child: Text(
+                    fileName,
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                    ),
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+    // widget.onSendTap.call(filePath, replyMessage, MessageType.custom);
+    // _assignRepliedMessage();
   }
 
   void _assignRepliedMessage() {
