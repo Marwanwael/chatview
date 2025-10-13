@@ -342,19 +342,23 @@ class SendMessageWidgetState extends State<SendMessageWidget> {
                     ),
                   ],
                 ),
-                ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color.fromRGBO(47, 114, 231, 1)),
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                      widget.onSendTap
-                          .call(filePath, replyMessage, MessageType.custom);
-                      _assignRepliedMessage();
-                    },
-                    child: Text(
-                      "Send",
-                      style: TextStyle(color: Colors.white, fontSize: 16),
-                    ))
+                SizedBox(
+                  width: 150,
+                  child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor:
+                              const Color.fromRGBO(47, 114, 231, 1)),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                        widget.onSendTap
+                            .call(filePath, replyMessage, MessageType.custom);
+                        _assignRepliedMessage();
+                      },
+                      child: Text(
+                        "Send",
+                        style: TextStyle(color: Colors.white, fontSize: 16),
+                      )),
+                )
               ],
             ),
           ),
