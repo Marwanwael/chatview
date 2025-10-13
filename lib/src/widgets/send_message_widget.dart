@@ -304,13 +304,15 @@ class SendMessageWidgetState extends State<SendMessageWidget> {
           ),
           child: Padding(
             padding: const EdgeInsets.all(20.0),
-            child: Column(
+            child: ListView(
+              shrinkWrap: true,
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     IconButton(
                         onPressed: () {
+                          Navigator.of(context).pop();
                           return;
                         },
                         icon: Icon(
@@ -344,6 +346,7 @@ class SendMessageWidgetState extends State<SendMessageWidget> {
                     style: ElevatedButton.styleFrom(
                         backgroundColor: const Color.fromRGBO(47, 114, 231, 1)),
                     onPressed: () {
+                      Navigator.of(context).pop();
                       widget.onSendTap
                           .call(filePath, replyMessage, MessageType.custom);
                       _assignRepliedMessage();
