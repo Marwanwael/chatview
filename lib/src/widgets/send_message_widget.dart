@@ -304,33 +304,60 @@ class SendMessageWidgetState extends State<SendMessageWidget> {
           ),
           child: Padding(
             padding: const EdgeInsets.all(20.0),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
+            child: Column(
               children: [
-                Icon(
-                  Icons.picture_as_pdf,
-                  color: Colors.redAccent,
-                  size: 40,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    IconButton(
+                        onPressed: () {
+                          return;
+                        },
+                        icon: Icon(
+                          Icons.clear,
+                          color: Colors.black,
+                        ))
+                  ],
                 ),
-                const SizedBox(width: 16),
-                Expanded(
-                  child: Text(
-                    fileName,
-                    style: const TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(
+                      Icons.picture_as_pdf,
+                      color: Colors.redAccent,
+                      size: 40,
                     ),
-                    overflow: TextOverflow.ellipsis,
-                  ),
+                    const SizedBox(width: 16),
+                    Expanded(
+                      child: Text(
+                        fileName,
+                        style: const TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                        ),
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                  ],
                 ),
+                ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color.fromRGBO(47, 114, 231, 1)),
+                    onPressed: () {
+                      widget.onSendTap
+                          .call(filePath, replyMessage, MessageType.custom);
+                      _assignRepliedMessage();
+                    },
+                    child: Text(
+                      "Send",
+                      style: TextStyle(color: Colors.white, fontSize: 16),
+                    ))
               ],
             ),
           ),
         );
       },
     );
-    // widget.onSendTap.call(filePath, replyMessage, MessageType.custom);
-    // _assignRepliedMessage();
   }
 
   void _assignRepliedMessage() {
