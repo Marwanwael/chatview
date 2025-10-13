@@ -343,7 +343,7 @@ class SendMessageWidgetState extends State<SendMessageWidget> {
                   ],
                 ),
                 Padding(
-                  padding: EdgeInsets.only(left: 30, right: 30),
+                  padding: EdgeInsets.only(left: 40, right: 40),
                   child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
                           backgroundColor:
