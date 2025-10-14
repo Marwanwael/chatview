@@ -392,6 +392,7 @@ class _ChatUITextFieldState extends State<ChatUITextField> {
   Future<String?> pickPdf() async {
     try {
       FilePickerResult? result = await FilePicker.platform.pickFiles(
+        allowMultiple: false,
         type: FileType.custom,
         allowedExtensions: ['pdf'],
       );

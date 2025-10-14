@@ -290,7 +290,7 @@ class SendMessageWidgetState extends State<SendMessageWidget> {
       showDialog(
         context: context,
         builder: (context) {
-          return Dialog(
+          return Dialog(backgroundColor: Colors.black,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(16),
             ),
@@ -309,14 +309,14 @@ class SendMessageWidgetState extends State<SendMessageWidget> {
                           },
                           icon: Icon(
                             Icons.clear,
-                            color: Colors.black,
+                            color: Colors.white,
                           ))
                     ],
                   ),
                   Container(
                       padding: EdgeInsets.only(
                           top: 10, right: 5, left: 5, bottom: 10),
-                      height: MediaQuery.of(context).size.height * 0.75,
+                      height: MediaQuery.of(context).size.height * 0.50,
                       width: MediaQuery.of(context).size.width,
                       child: Image(
                         image: FileImage(
