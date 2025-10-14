@@ -287,8 +287,66 @@ class SendMessageWidgetState extends State<SendMessageWidget> {
   void _onImageSelected(String imagePath, String error) {
     debugPrint('Call in Send Message Widget');
     if (imagePath.isNotEmpty) {
-      widget.onSendTap.call(imagePath, replyMessage, MessageType.image);
-      _assignRepliedMessage();
+      showDialog(
+        context: context,
+        builder: (context) {
+          return Dialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(16),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: ListView(
+                shrinkWrap: true,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      IconButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                            return;
+                          },
+                          icon: Icon(
+                            Icons.clear,
+                            color: Colors.black,
+                          ))
+                    ],
+                  ),
+                  Container(
+                      padding: EdgeInsets.only(
+                          top: 10, right: 5, left: 5, bottom: 10),
+                      height: MediaQuery.of(context).size.height * 0.75,
+                      width: MediaQuery.of(context).size.width,
+                      child: Image(
+                        image: FileImage(
+                          File(imagePath),
+                        ),
+                        fit: BoxFit.cover,
+                      )),
+                  Padding(
+                    padding: EdgeInsets.only(left: 40, right: 40),
+                    child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor:
+                                const Color.fromRGBO(47, 114, 231, 1)),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                          widget.onSendTap
+                              .call(imagePath, replyMessage, MessageType.image);
+                          _assignRepliedMessage();
+                        },
+                        child: Text(
+                          "Send",
+                          style: TextStyle(color: Colors.white, fontSize: 16),
+                        )),
+                  )
+                ],
+              ),
+            ),
+          );
+        },
+      );
     }
   }
 
