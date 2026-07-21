@@ -33,8 +33,7 @@ export 'package:audio_waveforms/audio_waveforms.dart'
         WaveStyle,
         PlayerWaveStyle,
         AndroidEncoder,
-        IosEncoder,
-        AndroidOutputFormat;
+        IosEncoder;
 export 'src/models/config_models/receipts_widget_config.dart';
 export 'src/extensions/extensions.dart' show MessageTypes;
 export 'package:emoji_picker_flutter/emoji_picker_flutter.dart';

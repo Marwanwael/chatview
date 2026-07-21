@@ -351,11 +351,7 @@ class _ChatUITextFieldState extends State<ChatUITextField> {
     );
     if (!isRecording.value) {
       await controller?.record(
-        sampleRate: voiceRecordingConfig?.sampleRate,
-        bitRate: voiceRecordingConfig?.bitRate,
-        androidEncoder: voiceRecordingConfig?.androidEncoder,
-        iosEncoder: voiceRecordingConfig?.iosEncoder,
-        androidOutputFormat: voiceRecordingConfig?.androidOutputFormat,
+        recorderSettings: voiceRecordingConfig!.recorderSettings,
       );
       isRecording.value = true;
     } else {
@@ -391,7 +387,7 @@ class _ChatUITextFieldState extends State<ChatUITextField> {
 
   Future<String?> pickPdf() async {
     try {
-      FilePickerResult? result = await FilePicker.platform.pickFiles(
+      FilePickerResult? result = await FilePicker.pickFiles(
         allowMultiple: false,
         type: FileType.custom,
         allowedExtensions: ['pdf'],
